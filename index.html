@@ -49,42 +49,33 @@
               async defer>
             </script> -->
 
-            <script type="text/javascript">
-            var map;
-            function initMap() {
-              var mapLayer = document.getElementById("map-layer");
-              var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
-              var defaultOptions = { center: centerCoordinates, zoom: 4 }
-
-              map = new google.maps.Map(mapLayer, defaultOptions);
-            }
-
-            function locate(){
-              document.getElementById("btnAction").disabled = true;
-              document.getElementById("btnAction").innerHTML = "Processing...";
-              if ("geolocation" in navigator){
-
-                navigator.geolocation.getCurrentPosition(function(position){ 
-                  var currentLatitude = position.coords.latitude;
-                  var currentLongitude = position.coords.longitude;
-
-                  var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
-                  var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
-                  var currentLocation = { lat: currentLatitude, lng: currentLongitude };
-                  infoWindow.setPosition(currentLocation);
-                  document.getElementById("btnAction").style.display = 'none';
-                });
-              }
-              else{
-                alert('heyyyy')
-              }
-            }
-</script>
-    <!-- end of the script -->
-    <script
+<script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TuNbVf_NXLgStaah1vSCHRBiNWqqjIg&callback=initMap&libraries=&v=weekly"
     async
   ></script>
+
+<script type="text/javascript">
+  if (navigator.geolocation) {
+    var location_timeout = setTimeout("geolocFail()", 10000);
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        clearTimeout(location_timeout);
+
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+
+        console.log(lat, lng);
+    }, function(error) {
+        clearTimeout(location_timeout);
+        console.log('noch');
+    });
+} else {
+    // Fallback for no geolocation
+    console.log('noch');
+}
+</script>
+    <!-- end of the script -->
+
     
       <!-- Optional JavaScript -->
       <!-- Option 1: Bootstrap Bundle with Popper -->
