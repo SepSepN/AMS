@@ -85,9 +85,41 @@
               
               <div class="content-section">
                 <div id="map"></div>
+
+
                 <script>
-              
-                
+                  var map,lat,long;
+
+            function initMap() {
+                var initCoords=function() {
+                    if ( navigator.geolocation ) {
+                        navigator.geolocation.getCurrentPosition(showPosition, showError);
+                    }
+                }
+                var showError=function(e){
+                    alert(e)
+                };
+
+                var showPosition=function( position ) {
+                    var lat = position.coords.latitude;
+                    var long =  position.coords.longitude;
+                    var latlng=new google.maps.LatLng(lat,long);
+
+                    var map = new google.maps.Map( document.getElementById('map'), {
+                        center: latlng,
+                        zoom: 12
+                    });
+                }
+
+
+    /* other code ?.... */
+
+}/* 
+                </script>
+
+
+
+                <!-- <script>
               
                   let map, infoWindow;
               
@@ -141,46 +173,11 @@
               
               
               
-              
+               -->
                
                   
               
-                <!-- Google Map -->
-                <!-- <div id="map"></div> -->
-                  <!-- <script>
-                    function initMap(){
-                      var options = {
-                        zoom:15,
-                        center:{lat:29.621408,lng:52.531158},
-                      }
-                      var map = new google.maps.Map(document.getElementById("map"), options);
-                    
-                      //listen for click on map
-                      google.maps.event.addListener(map, 'click', function(event){
-                          marker = new google.maps.Marker({
-                          position:event.latLng,
-                          map: map,
-                        });
-                      });
-              
-                      marker = new google.maps.Marker({
-                      position:{lat:29.622113,lng:52.529816},
-                      map: map,
-                    });
-              
-                    
-                    var infoWindow = new google.maps.InfoWindow({
-                      content:'<h4>پارس مهر</h4>'
-                    });
-              
-                    marker.addListener('click',function(){
-                      infoWindow.open(map, marker);
-                    });
-              
-              
-                  }
-              
-                  </script> -->
+                
               
                   <script
                   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TuNbVf_NXLgStaah1vSCHRBiNWqqjIg&callback=initMap&libraries=&v=weekly"
