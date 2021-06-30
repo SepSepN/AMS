@@ -82,39 +82,39 @@
                 }
                 
               </style>
-              <div class="map"></div>
-    <script>
-              function initMap() {
-                lat=56;
-                long=-2;
-                var map = new google.maps.Map(document.getElementById('map'), {
-                  center: new google.maps.LatLng(lat, long),
-                  zoom: 12
-                });
-            
-                var initCoords=function() {
-                    if ( navigator.geolocation ) {
-                        navigator.geolocation.getCurrentPosition(showPosition, showError);
-                    }
+              
+              <div class="content-section">
+                <div id="map"></div>
+
+
+                <script>
+                    var map,lat,long;
+
+                    function initMap() {
+                      var initCoords=function() {
+                          if ( navigator.geolocation ) {
+                              navigator.geolocation.getCurrentPosition(showPosition, showError);
+                          }
+                        }
+                      var showError=function(e){
+                          alert(e)
+                      };
+
+                      var showPosition=function( position ) {
+                          var lat = position.coords.latitude;
+                          var long =  position.coords.longitude;
+                          var latlng=new google.maps.LatLng(lat,long);
+
+                          var map = new google.maps.Map( document.getElementById('map'), {
+                              center: latlng,
+                              zoom: 12
+                          });
+                      }
+
+
+
                 }
-                var showError=function(e){
-                    alert(e)
-                };
-            
-                var showPosition=function( position ) {
-                    var lat = position.coords.latitude;
-                    var long =  position.coords.longitude;
-                    var latlng=new google.maps.LatLng(lat,long);
-                    map.setPosition( latlng );
-            
-                    /* add marker?? */
-                }
-            
-            
-                /* other code ?.... */
-            
-            }/* close function*/
-    </script>
+                </script>
 
 
 
