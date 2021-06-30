@@ -89,34 +89,37 @@
 
 
                 <script>
-                  let map,lat,long;
-                  alert('we are out of the if')
-                  function initMap() 
-                            {
-                                var initCoords=function() {
-                                    if ( navigator.geolocation ) {
-                                      alert("we are in the if")
-                                        navigator.geolocation.getCurrentPosition(showPosition, showError);
-                                    }
-                                };
-
-                                var showError=function(e){
-                                    alert(e)
-                                };
-
-
-                                var showPosition=function( position ) {
-                                    var lat = position.coords.latitude;
-                                    var long =  position.coords.longitude;
-                                    var latlng=new google.maps.LatLng(lat,long);
-
-                                    var map = new google.maps.Map( document.getElementById('map'), {
-                                        center: latlng,
-                                        zoom: 12
-                                    });
-                                }
-
-                            }
+                  function initMap() {
+                    lat=56;
+                    long=-2;
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                      center: new google.maps.LatLng(lat, long),
+                      zoom: 12
+                    });
+                
+                    var initCoords=function() {
+                        if ( navigator.geolocation ) {
+                          alert('we are in the if')
+                            navigator.geolocation.getCurrentPosition(showPosition, showError);
+                        }
+                    }
+                    var showError=function(e){
+                        alert(e)
+                    };
+                
+                    var showPosition=function( position ) {
+                        var lat = position.coords.latitude;
+                        var long =  position.coords.longitude;
+                        var latlng=new google.maps.LatLng(lat,long);
+                        map.setPosition( latlng );
+                
+                        /* add marker?? */
+                    }
+                
+                
+                  
+                
+                }
               </script>
 
 
