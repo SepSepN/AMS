@@ -38,7 +38,7 @@
 
     <h1>How to Get Current Location using Google Map Javascript API</h1>
     <div id="button-layer">
-      <button id="btnAction" onClick="locate()">My Current Location</button>
+      <button id="btnAction" >My Current Location</button>
     </div>
     <div id="map-layer"></div>
 
@@ -55,23 +55,25 @@
   ></script>
 
 <script type="text/javascript">
-  if (navigator.geolocation) {
-    var location_timeout = setTimeout("geolocFail()", 10000);
+  function initMap() {
+    if (navigator.geolocation) {
+      var location_timeout = setTimeout("geolocFail()", 10000);
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-        clearTimeout(location_timeout);
+      navigator.geolocation.getCurrentPosition(function(position) {
+          clearTimeout(location_timeout);
 
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
 
-        console.log(lat, lng);
-    }, function(error) {
-        clearTimeout(location_timeout);
-        console.log('noch');
-    });
-} else {
-    // Fallback for no geolocation
-    console.log('noch');
+          console.log(lat, lng);
+      }, function(error) {
+          clearTimeout(location_timeout);
+          console.log('getCurrentPosition noch');
+      });
+  } else {
+      // Fallback for no geolocation
+      console.log('if navigator.geolocation else noch');
+  }
 }
 </script>
     <!-- end of the script -->
