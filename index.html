@@ -98,10 +98,12 @@
                                       alert("we are in the if")
                                         navigator.geolocation.getCurrentPosition(showPosition, showError);
                                     }
-                                }
+                                };
+
                                 var showError=function(e){
                                     alert(e)
                                 };
+
 
                                 var showPosition=function( position ) {
                                     var lat = position.coords.latitude;
@@ -115,7 +117,7 @@
                                 }
 
                             }
-                </script>
+              </script>
 
 
 
