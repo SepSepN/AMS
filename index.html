@@ -73,6 +73,7 @@
                   var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
                   var currentLocation = { lat: currentLatitude, lng: currentLongitude };
                   infoWindow.setPosition(currentLocation);
+                  console.log(currentLocation)
                   document.getElementById("btnAction").style.display = 'none';
                 });
               }
