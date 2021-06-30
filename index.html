@@ -64,6 +64,7 @@
               document.getElementById("btnAction").disabled = true;
               document.getElementById("btnAction").innerHTML = "Processing...";
               if ("geolocation" in navigator){
+
                 navigator.geolocation.getCurrentPosition(function(position){ 
                   var currentLatitude = position.coords.latitude;
                   var currentLongitude = position.coords.longitude;
@@ -74,6 +75,9 @@
                   infoWindow.setPosition(currentLocation);
                   document.getElementById("btnAction").style.display = 'none';
                 });
+              }
+              else{
+                alert('heyyyy')
               }
             }
 </script>
