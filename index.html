@@ -1,98 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<body>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-      body {
-        font-family :Arial;
-      }
-      #map-layer {
-        margin: 20px 0px;
-        max-width: 600px;
-        min-height: 400;
-      }
-      #btnAction {
-        background: #3878c7;
-          padding: 10px 40px;
-          border: #3672bb 1px solid;
-          border-radius: 2px;
-          color: #FFF;
-          font-size: 0.9em;
-          cursor:pointer;
-          display:block;
-      }
-      #btnAction:disabled {
-          background: #6c99d2;
-      }
-      </style>
-  
-  </head>
-    <body>
+<p>Click the button to get your coordinates.</p>
 
-    
+<button onclick="getLocation()">Try It</button>
 
-    <h1>How to Get Current Location using Google Map Javascript API</h1>
-    <div id="button-layer">
-      <button id="btnAction" onClick="locate()">My Current Location</button>
-    </div>
-    <div id="map-layer"></div>
+<p id="demo"></p>
 
+<script>
+var x = document.getElementById("demo");
 
-    <!-- start of script -->
-            <!-- <script
-              src="https://maps.googleapis.com/maps/api/js?key=<?php echo AIzaSyD7TuNbVf_NXLgStaah1vSCHRBiNWqqjIg; ?>&callback=initMap"
-              async defer>
-            </script> -->
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
 
-            <script type="text/javascript">
-            var map;
-            function initMap() {
-              console.log('ehsan')
-              var mapLayer = document.getElementById("map-layer");
-              var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
-              var defaultOptions = { center: centerCoordinates, zoom: 4 }
-
-              map = new google.maps.Map(mapLayer, defaultOptions);
-            }
-
-            function locate(){
-              document.getElementById("btnAction").disabled = true;
-              document.getElementById("btnAction").innerHTML = "Processing...";
-              if ("geolocation" in navigator){
-
-                navigator.geolocation.getCurrentPosition(function(position){ 
-                  var currentLatitude = position.coords.latitude;
-                  var currentLongitude = position.coords.longitude;
-
-                  var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
-                  var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
-                  var currentLocation = { lat: currentLatitude, lng: currentLongitude };
-                  infoWindow.setPosition(currentLocation);
-                  console.log(currentLocation)
-                  document.getElementById("btnAction").style.display = 'none';
-                });
-              }
-              else{
-                alert('heyyyy')
-              }
-            }
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
 </script>
-    <!-- end of the script -->
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TuNbVf_NXLgStaah1vSCHRBiNWqqjIg&callback=initMap&libraries=&v=weekly"
-    async
-  ></script>
-    
-      <!-- Optional JavaScript -->
-      <!-- Option 1: Bootstrap Bundle with Popper -->
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
 
+</body>
 </html>
